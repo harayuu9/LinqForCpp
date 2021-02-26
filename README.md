@@ -1,0 +1,4 @@
+# CppLinq
+
+## License
+MIT
