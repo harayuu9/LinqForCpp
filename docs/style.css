@@ -1,0 +1,12 @@
+div canvas {
+    display: inline-block;  
+}
+
+div p {
+    color: aqua;
+    display: inline-block;
+}
+
+p {
+    color: blue;
+}
