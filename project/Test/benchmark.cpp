@@ -3,48 +3,6 @@
 #include "Test.h"
 
 #if ENABLE_PERF
-static void NativeDistinct( benchmark::State& state )
-{
-    while ( state.KeepRunning() )
-    {
-        MEM_RESET();
-        std::vector<CData> result;
-        for ( auto&& bigStruct : gBigStruct )
-        {
-            if ( std::find( result.begin(), result.end(), bigStruct ) == result.end() )
-                result.push_back( bigStruct );
-        }
-        MEM_COUNTER( state );
-    }
-}
-
-
-static void MyLinqDistinct( benchmark::State& state )
-{
-    while ( state.KeepRunning() )
-    {
-        MEM_RESET();
-        // distinct : 重複を取り除く。
-        auto _Ret5 = gBigStruct
-            << linq::Distinct()
-            << linq::ToVector();
-        MEM_COUNTER( state );
-    }
-}
-
-static void CppLinqDistinct( benchmark::State& state )
-{
-    using namespace cpplinq;
-
-    while ( state.KeepRunning() )
-    {
-        MEM_RESET();
-        auto _Ret2 = from( gBigStruct )
-            >> distinct()
-            >> to_vector();
-        MEM_COUNTER( state );
-    }
-}
 
 static void NativeSelectMany( benchmark::State& state )
 {
@@ -91,32 +49,6 @@ static void MyLinqSelectMany( benchmark::State& state )
     }
 }
 
-static void MyLinqOrderBy( benchmark::State& state )
-{
-    while ( state.KeepRunning() )
-    {
-        MEM_RESET();
-        auto result = gBigStruct
-            << linq::OrderByAscending( []( const auto& data ) { return data.id; } )
-            << linq::ThenByDescending( []( const auto& x ) { return x.name.length(); } )
-            << linq::ToVector();
-        MEM_COUNTER( state );
-    }
-}
-
-static void CppLinqOrderBy( benchmark::State& state )
-{
-    using namespace cpplinq;
-    while ( state.KeepRunning() )
-    {
-        MEM_RESET();
-        auto _Ret1 = from( gBigStruct )
-            >> orderby_ascending( []( const auto& x ) { return ( x.id ); } )
-            >> thenby_descending( []( const auto& x ) { return ( x.name.length() ); } )
-            >> to_vector();
-        MEM_COUNTER( state );
-    }
-}
 
 static void NativeFirstOrDefault( benchmark::State& state )
 {
@@ -160,11 +92,6 @@ static void CppLinqFirstOrDefault( benchmark::State& state )
 BENCHMARK( NativeSelectMany );
 BENCHMARK( NativeSelectMany );
 BENCHMARK( MyLinqSelectMany );
-BENCHMARK( NativeDistinct );
-BENCHMARK( MyLinqDistinct );
-BENCHMARK( CppLinqDistinct );
-BENCHMARK( MyLinqOrderBy );
-BENCHMARK( CppLinqOrderBy );
 BENCHMARK( NativeFirstOrDefault );
 BENCHMARK( MyLinqFirstOrDefault );
 BENCHMARK( CppLinqFirstOrDefault );
