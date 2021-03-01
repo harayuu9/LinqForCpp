@@ -11,7 +11,7 @@ TEST( Skip, Normal )
         auto itr = gBigStruct.begin();
         for ( ; itr != gBigStruct.end(); ++itr )
         {
-            if (!(itr->id < 4000))
+            if ( !( itr->id < 4000 ) )
             {
                 ++itr;
                 break;
@@ -26,13 +26,13 @@ TEST( Skip, Normal )
         auto itr = gBigStruct.begin();
         for ( ; itr != gBigStruct.end(); ++itr )
         {
-            if (!(itr->id < 10000))
+            if ( !( itr->id < 10000 ) )
             {
                 ++itr;
                 break;
             }
         }
-        ASSERT_TRUE(itr == gBigStruct.end());
+        ASSERT_TRUE( itr == gBigStruct.end() );
         ASSERT_TRUE( skipWhile.begin() == skipWhile.end() );
         ASSERT_TRUE( std::equal(skipWhile.begin(), skipWhile.end(), itr, gBigStruct.end()) );
     }
@@ -80,7 +80,10 @@ static void NativeSkipWhile( benchmark::State& state )
         for ( ; itr != gBigStruct.end(); ++itr )
         {
             if ( itr->id > 4000 )
+            {
+                ++itr;
                 break;
+            }
         }
         std::vector<CData> skipWhile( itr, gBigStruct.end() );
         MEM_COUNTER( state );

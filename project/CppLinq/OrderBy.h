@@ -5,9 +5,6 @@
 #define ORDER_BY(variant, cond, isAscending) ::linq::OrderBy([&](const auto& (variant)){ return cond;}, isAscending)
 #define ORDER_BY_ASCENDING(variant, cond) ::linq::OrderByAscending([&](const auto& (variant)){ return cond;})
 #define ORDER_BY_DESCENDING(variant, cond) ::linq::OrderByDescending([&](const auto& (variant)){ return cond;})
-#define THEN_BY(variant, cond, isAscending) ::linq::ThenBy([&](const auto& (variant)){ return cond;}, isAscending)
-#define THEN_BY_ASCENDING(variant, cond)    ::linq::ThenByAscending([&](const auto& (variant)){ return cond;})
-#define THEN_BY_DESCENDING(variant, cond)   ::linq::ThenByDescending([&](const auto& (variant)){ return cond;})
 namespace linq {
 
 template<typename Func>

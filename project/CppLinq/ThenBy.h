@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include "OrderBy.h"
 
+#define THEN_BY(variant, cond, isAscending) ::linq::ThenBy([&](const auto& (variant)){ return cond;}, isAscending)
+#define THEN_BY_ASCENDING(variant, cond)    ::linq::ThenByAscending([&](const auto& (variant)){ return cond;})
+#define THEN_BY_DESCENDING(variant, cond)   ::linq::ThenByDescending([&](const auto& (variant)){ return cond;})
 namespace linq {
 
 template<typename Func>

@@ -1,22 +1,21 @@
 ﻿#include "Test.h"
 
-TEST( Avg, Normal )
+TEST( Sum, Normal )
 {
     const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 
-    auto baseResult = 0.0f;
+    auto baseResult = 0;
     for ( auto&& value : baseArray )
     {
-        baseResult += static_cast<float>( value );
+        baseResult += value;
     }
-    baseResult /= baseArray.size();
 
-    const auto result = baseArray << linq::Avg<float>();
+    const auto result = baseArray << linq::Sum();
     ASSERT_EQ( baseResult, result );
 }
 
 #if ENABLE_PERF
-static void NativeAvg( benchmark::State& state )
+static void NativeSum( benchmark::State& state )
 {
     const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
     while ( state.KeepRunning() )
@@ -27,40 +26,36 @@ static void NativeAvg( benchmark::State& state )
         {
             baseResult += static_cast<float>( value );
         }
-        baseResult /= baseArray.size();
         benchmark::DoNotOptimize( baseResult );
         MEM_COUNTER( state );
     }
 }
 
-static void LinqForCppAvg( benchmark::State& state )
+static void LinqForCppSum( benchmark::State& state )
 {
     const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
     while ( state.KeepRunning() )
     {
         MEM_RESET();
-        const auto result = baseArray << linq::Avg<float>();
+        const auto result = baseArray << linq::Sum();
         benchmark::DoNotOptimize( result );
         MEM_COUNTER( state );
     }
 }
 
-static void CppLinqAvg( benchmark::State& state )
+static void CppLinqSum( benchmark::State& state )
 {
     const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
     while ( state.KeepRunning() )
     {
         MEM_RESET();
-        // can't choice return type in cpplinq
-        const auto result = cpplinq::from( baseArray )
-            >> cpplinq::select( []( int val ) { return static_cast<float>( val ); } )
-            >> cpplinq::avg();
+        const auto result = cpplinq::from( baseArray ) >> cpplinq::sum();
         benchmark::DoNotOptimize( result );
         MEM_COUNTER( state );
     }
 }
 
-BENCHMARK( NativeAvg );
-BENCHMARK( LinqForCppAvg );
-BENCHMARK( CppLinqAvg );
+BENCHMARK( NativeSum );
+BENCHMARK( LinqForCppSum );
+BENCHMARK( CppLinqSum );
 #endif

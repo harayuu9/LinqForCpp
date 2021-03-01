@@ -3,6 +3,7 @@
 #include "TypeTraits.h"
 
 #define SELECT(variant, convert) ::linq::Select([&](const auto& (variant)){ return convert; })
+#define SELECT_MANY(variant, convert) ::linq::SelectMany([&](const auto& (variant)){ return convert; })
 namespace linq {
 /**
  * \brief Select
