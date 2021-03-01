@@ -26,9 +26,9 @@ function loadJson(json, tag)
                 }
             }
         }
-        else if(benchmark.name.startsWith("MyLinq"))
+        else if(benchmark.name.startsWith("LinqForCpp"))
         {
-            var name = benchmark.name.replace("MyLinq", "");
+            var name = benchmark.name.replace("LinqForCpp", "");
             const find = data.find(d => d.name == name);
             if(find == undefined)
             {
@@ -100,7 +100,7 @@ function drawImpl()
             data: {
                 labels: labels,
                 datasets: [
-                    {label: "MyLinq", data: myLinqData, backgroundColor: "Red"},
+                    {label: "LinqForCpp", data: myLinqData, backgroundColor: "Red"},
                     {label: "Native", data: nativeData, backgroundColor: "LightGreen"},
                     {label: "CppLinq", data: cppLinqData, backgroundColor: "SkyBlue"}
                 ]
