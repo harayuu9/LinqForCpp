@@ -78,7 +78,19 @@ function loadJson(json, tag)
 function drawImpl()
 {
     var numId = 0;
+    var html = "";
+    data.map(_ =>{
+        var id = "mychart" + numId;
+        html += `<div><canvas id="${id}"></canvas></div>`;
+        numId++;
+    })
+    chart.innerHTML = html;
+
+    var tabHtml = "";
+    numId = 0;
     data.map(rowData => {
+        tabHtml += `<p><button id = button${numId} type="button" onclick=OnButtonClick(${numId})>${rowData.name}</button></p>`;
+
         const labels = [];
         var myLinqData = [];
         var nativeData = [];
@@ -91,9 +103,6 @@ function drawImpl()
         });
 
         var id = "mychart" + numId;
-        document.writeln('<div style="width: 60%;">');
-        document.writeln(`<canvas id="${id}"></canvas>`);
-
         const ctx = document.getElementById(id).getContext("2d");
         const myChart = new Chart(ctx, {
             type: "bar",
@@ -107,24 +116,14 @@ function drawImpl()
             }
         });
         numId++;
-        document.writeln('</div>');
     });
+    leftTab.innerHTML = tabHtml;
 }
 
-function drawBarChart(filePath, tag, init = false,end = false) {
+function drawBarChart(filePath, tag, end = false) {
     var req = new XMLHttpRequest();
     req.open("GET", filePath, true);
     req.onload = function () {
-        if(init)
-        {
-            var head = document.head;
-            var linkElement = document.createElement("link");
-            linkElement.type = "text/css";
-            linkElement.rel = "stylesheet";
-            linkElement.href = "style.css";
-            head.appendChild(linkElement);
-        }
-
         const json = JSON.parse(req.responseText);
         loadJson(json, tag);
 
@@ -137,12 +136,18 @@ function drawBarChart(filePath, tag, init = false,end = false) {
 }
 
 function main() {
-    drawBarChart("Json/windows-latest.CPP17.json", "Win17", true);
+    drawBarChart("Json/windows-latest.CPP17.json", "Win17");
     drawBarChart("Json/windows-latest.CPP20.json", "Win20");
     drawBarChart("Json/ubuntu-latest.CPP17.json", "Ubuntu17");
     drawBarChart("Json/ubuntu-latest.CPP20.json","Ubuntu20");
     drawBarChart("Json/macos-latest.CPP17.json", "Mac17");
-    drawBarChart("Json/macos-latest.CPP20.json", "Mac20", false, true);
+    drawBarChart("Json/macos-latest.CPP20.json", "Mac20", true);
+}
+
+function OnButtonClick(num)
+{
+    var pos = document.getElementById(`mychart${num}`).getBoundingClientRect();
+    window.scrollTo(0, pos.top);
 }
 
 main();

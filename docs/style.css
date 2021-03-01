@@ -1,12 +1,14 @@
-div canvas {
-    display: inline-block;  
+#wrapper {
+    display: flex;
 }
-
-div p {
-    color: aqua;
-    display: inline-block;
+  
+.left-column {
+    width: 150px;
+    position: absolute;
+    top: 0;
 }
-
-p {
-    color: blue;
+  
+.right-column {
+    margin-left: 150px;
+    width: 1200px;
 }
