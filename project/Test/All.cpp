@@ -23,7 +23,7 @@ static void NativeAll( benchmark::State& state )
 	}
 }
 
-static void CppForLinqAll( benchmark::State& state )
+static void LinqForCppAll( benchmark::State& state )
 {
 	while ( state.KeepRunning() )
 	{
@@ -46,6 +46,6 @@ static void CppLinqAll( benchmark::State& state )
 }
 
 BENCHMARK( NativeAll );
-BENCHMARK( CppForLinqAll );
+BENCHMARK( LinqForCppAll );
 BENCHMARK( CppLinqAll );
 #endif

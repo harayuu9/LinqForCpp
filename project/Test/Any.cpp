@@ -23,7 +23,7 @@ static void NativeAny( benchmark::State& state )
 	}
 }
 
-static void CppForLinqAny( benchmark::State& state )
+static void LinqForCppAny( benchmark::State& state )
 {
 	while ( state.KeepRunning() )
 	{
@@ -46,6 +46,6 @@ static void CppLinqAny( benchmark::State& state )
 }
 
 BENCHMARK( NativeAny );
-BENCHMARK( CppForLinqAny );
+BENCHMARK( LinqForCppAny );
 BENCHMARK( CppLinqAny );
 #endif

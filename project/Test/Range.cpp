@@ -30,7 +30,7 @@ static void NativeRange( benchmark::State& state )
     }
 }
 
-static void CppForLinqRange( benchmark::State& state )
+static void LinqForCppRange( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -51,6 +51,6 @@ static void CppLinqRange( benchmark::State& state )
 }
 
 BENCHMARK( NativeRange );
-BENCHMARK( CppForLinqRange );
+BENCHMARK( LinqForCppRange );
 BENCHMARK( CppLinqRange );
 #endif

@@ -33,7 +33,7 @@ static void NativeMax( benchmark::State& state )
 	}
 }
 
-static void CppForLinqMax( benchmark::State& state )
+static void LinqForCppMax( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -58,6 +58,6 @@ static void CppLinqMax( benchmark::State& state )
 }
 
 BENCHMARK( NativeMax );
-BENCHMARK( CppForLinqMax );
+BENCHMARK( LinqForCppMax );
 BENCHMARK( CppLinqMax );
 #endif
