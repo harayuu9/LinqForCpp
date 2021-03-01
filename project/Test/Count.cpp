@@ -30,7 +30,7 @@ static void NativeCount( benchmark::State& state )
 	}
 }
 
-static void MyLinqCount( benchmark::State& state )
+static void CppForLinqCount( benchmark::State& state )
 {
 	while ( state.KeepRunning() )
 	{
@@ -50,6 +50,6 @@ static void CppLinqCount( benchmark::State& state )
 	}
 }
 BENCHMARK( NativeCount );
-BENCHMARK( MyLinqCount );
+BENCHMARK( CppForLinqCount );
 BENCHMARK( CppLinqCount );
 #endif

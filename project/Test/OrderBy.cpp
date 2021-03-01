@@ -57,7 +57,7 @@ static void NativeOrderBy( benchmark::State& state )
     }
 }
 
-static void MyLinqOrderBy( benchmark::State& state )
+static void CppForLinqOrderBy( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -85,6 +85,6 @@ static void CppLinqOrderBy( benchmark::State& state )
 }
 
 BENCHMARK( NativeOrderBy );
-BENCHMARK( MyLinqOrderBy );
+BENCHMARK( CppForLinqOrderBy );
 BENCHMARK( CppLinqOrderBy );
 #endif

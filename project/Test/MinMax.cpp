@@ -40,7 +40,7 @@ static void NativeMinMax( benchmark::State& state )
 	}
 }
 
-static void MyLinqMinMax( benchmark::State& state )
+static void CppForLinqMinMax( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -67,6 +67,6 @@ static void CppLinqMinMax( benchmark::State& state )
 }
 
 BENCHMARK( NativeMinMax );
-BENCHMARK( MyLinqMinMax );
+BENCHMARK( CppForLinqMinMax );
 BENCHMARK( CppLinqMinMax );
 #endif

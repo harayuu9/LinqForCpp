@@ -21,7 +21,7 @@ static void NativeDistinct( benchmark::State& state )
     }
 }
 
-static void MyLinqDistinct( benchmark::State& state )
+static void CppForLinqDistinct( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -42,6 +42,6 @@ static void CppLinqDistinct( benchmark::State& state )
 }
 
 BENCHMARK( NativeDistinct );
-BENCHMARK( MyLinqDistinct );
+BENCHMARK( CppForLinqDistinct );
 BENCHMARK( CppLinqDistinct );
 #endif

@@ -30,7 +30,7 @@ static void NativeAggregate( benchmark::State& state )
 	}
 }
 
-static void MyLinqAggregate( benchmark::State& state )
+static void CppForLinqAggregate( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -55,6 +55,6 @@ static void CppLinqAggregate( benchmark::State& state )
 }
 
 BENCHMARK( NativeAggregate );
-BENCHMARK( MyLinqAggregate );
+BENCHMARK( CppForLinqAggregate );
 BENCHMARK( CppLinqAggregate );
 #endif

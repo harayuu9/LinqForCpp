@@ -28,7 +28,7 @@ static void NativeSelect(benchmark::State& state)
         MEM_COUNTER(state);
     }
 }
-static void MyLinqSelect(benchmark::State& state)
+static void CppForLinqSelect(benchmark::State& state)
 {
     while (state.KeepRunning())
     {
@@ -49,6 +49,6 @@ static void CppLinqSelect(benchmark::State& state)
 }
 
 BENCHMARK(NativeSelect);
-BENCHMARK(MyLinqSelect);
+BENCHMARK(CppForLinqSelect);
 BENCHMARK(CppLinqSelect);
 #endif

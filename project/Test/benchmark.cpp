@@ -25,7 +25,7 @@ static void NativeSelectMany( benchmark::State& state )
     }
 }
 
-static void MyLinqSelectMany( benchmark::State& state )
+static void CppForLinqSelectMany( benchmark::State& state )
 {
     using namespace linq;
 
@@ -65,7 +65,7 @@ static void NativeFirstOrDefault( benchmark::State& state )
     }
 }
 
-static void MyLinqFirstOrDefault( benchmark::State& state )
+static void CppForLinqFirstOrDefault( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -91,9 +91,9 @@ static void CppLinqFirstOrDefault( benchmark::State& state )
 
 BENCHMARK( NativeSelectMany );
 BENCHMARK( NativeSelectMany );
-BENCHMARK( MyLinqSelectMany );
+BENCHMARK( CppForLinqSelectMany );
 BENCHMARK( NativeFirstOrDefault );
-BENCHMARK( MyLinqFirstOrDefault );
+BENCHMARK( CppForLinqFirstOrDefault );
 BENCHMARK( CppLinqFirstOrDefault );
 
 #endif

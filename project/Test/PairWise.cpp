@@ -34,7 +34,7 @@ static void NativePairWise( benchmark::State& state )
     }
 }
 
-static void MyLinqPairWise( benchmark::State& state )
+static void CppForLinqPairWise( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -60,6 +60,6 @@ static void CppLinqPairWise( benchmark::State& state )
 }
 
 BENCHMARK( NativePairWise );
-BENCHMARK( MyLinqPairWise );
+BENCHMARK( CppForLinqPairWise );
 BENCHMARK( CppLinqPairWise );
 #endif

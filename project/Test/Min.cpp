@@ -33,7 +33,7 @@ static void NativeMin( benchmark::State& state )
 	}
 }
 
-static void MyLinqMin( benchmark::State& state )
+static void CppForLinqMin( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -58,6 +58,6 @@ static void CppLinqMin( benchmark::State& state )
 }
 
 BENCHMARK( NativeMin );
-BENCHMARK( MyLinqMin );
+BENCHMARK( CppForLinqMin );
 BENCHMARK( CppLinqMin );
 #endif

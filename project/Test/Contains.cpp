@@ -24,7 +24,7 @@ static void NativeContains( benchmark::State& state )
 	}
 }
 
-static void MyLinqContains( benchmark::State& state )
+static void CppForLinqContains( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT(val, val.id) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -51,6 +51,6 @@ static void CppLinqContains( benchmark::State& state )
 }
 
 BENCHMARK( NativeContains );
-BENCHMARK( MyLinqContains );
+BENCHMARK( CppForLinqContains );
 BENCHMARK( CppLinqContains );
 #endif

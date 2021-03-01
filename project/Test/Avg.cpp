@@ -33,7 +33,7 @@ static void NativeAvg( benchmark::State& state )
 	}
 }
 
-static void MyLinqAvg( benchmark::State& state )
+static void CppForLinqAvg( benchmark::State& state )
 {
 	const auto baseArray = gBigStruct << SELECT( val, val.id ) << linq::ToVector();
 	while ( state.KeepRunning() )
@@ -58,6 +58,6 @@ static void CppLinqAvg( benchmark::State& state )
 }
 
 BENCHMARK( NativeAvg );
-BENCHMARK( MyLinqAvg );
+BENCHMARK( CppForLinqAvg );
 BENCHMARK( CppLinqAvg );
 #endif

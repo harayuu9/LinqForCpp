@@ -30,7 +30,7 @@ static void NativeRepeat( benchmark::State& state )
     }
 }
 
-static void MyLinqRepeat( benchmark::State& state )
+static void CppForLinqRepeat( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -51,6 +51,6 @@ static void CppLinqRepeat( benchmark::State& state )
 }
 
 BENCHMARK( NativeRepeat );
-BENCHMARK( MyLinqRepeat );
+BENCHMARK( CppForLinqRepeat );
 BENCHMARK( CppLinqRepeat );
 #endif

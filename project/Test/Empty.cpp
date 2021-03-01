@@ -20,7 +20,7 @@ static void NativeEmpty( benchmark::State& state )
     }
 }
 
-static void MyLinqEmpty( benchmark::State& state )
+static void CppForLinqEmpty( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -41,6 +41,6 @@ static void CppLinqEmpty( benchmark::State& state )
 }
 
 BENCHMARK( NativeEmpty );
-BENCHMARK( MyLinqEmpty );
+BENCHMARK( CppForLinqEmpty );
 BENCHMARK( CppLinqEmpty );
 #endif
