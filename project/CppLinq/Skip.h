@@ -108,8 +108,11 @@ class SkipWhileBuilder
             for ( auto itr = beginItr; itr != endItr; ++itr )
             {
                 cnt++;
-                if ( !mFunc( *itr ) )
+                if (!mFunc(*itr))
+                {
+                    ++itr;
                     return itr;
+                }
             }
             return endItr;
         }

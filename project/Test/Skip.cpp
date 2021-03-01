@@ -7,25 +7,33 @@ TEST( Skip, Normal )
 
     // found
     {
-        const auto skipWhile = gBigStruct << SKIP_WHILE( val, val.id > 4000 );
+        const auto skipWhile = gBigStruct << SKIP_WHILE( val, val.id < 4000 );
         auto itr = gBigStruct.begin();
         for ( ; itr != gBigStruct.end(); ++itr )
         {
-            if ( itr->id > 4000 )
+            if (!(itr->id < 4000))
+            {
+                ++itr;
                 break;
+            }
         }
         ASSERT_TRUE( std::equal(skipWhile.begin(), skipWhile.end(), itr, gBigStruct.end()) );
     }
 
     // not found
     {
-        const auto skipWhile = gBigStruct << SKIP_WHILE( val, val.id > 10000 );
+        const auto skipWhile = gBigStruct << SKIP_WHILE( val, val.id < 10000 );
         auto itr = gBigStruct.begin();
         for ( ; itr != gBigStruct.end(); ++itr )
         {
-            if ( itr->id > 10000 )
+            if (!(itr->id < 10000))
+            {
+                ++itr;
                 break;
+            }
         }
+        ASSERT_TRUE(itr == gBigStruct.end());
+        ASSERT_TRUE( skipWhile.begin() == skipWhile.end() );
         ASSERT_TRUE( std::equal(skipWhile.begin(), skipWhile.end(), itr, gBigStruct.end()) );
     }
 }
