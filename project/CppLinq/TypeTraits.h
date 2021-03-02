@@ -37,10 +37,26 @@ constexpr bool have_const_iterator_v = have_const_iterator<T>::Type::value;
 template<typename Array>
 class array_type
 {
+    class impl1
+    {
+        template<typename U> static auto test(int) -> decltype(*std::begin(std::declval<std::add_const_t<U>>()));
+        template<typename U> static void test(...);
+    public:
+        using Type = std::remove_const_t<std::remove_reference_t<decltype(test<Array>(1))>>;
+    };
+
+    class impl2
+    {
+        template<typename U> static auto test(int) -> decltype(*std::begin(std::declval<U>()));
+        template<typename U> static void test(...);
+    public:
+        using Type = std::remove_const_t<std::remove_reference_t<decltype(test<Array>(1))>>;
+    };
+
     template<typename U> static auto test( int ) -> decltype(*std::begin( std::declval<std::add_const_t<U>>() ));
     template<typename U> static void test( ... );
 public:
-    using Type = std::remove_const_t<std::remove_reference_t<decltype(test<Array>( 1 ))>>;
+    using Type = std::conditional_t<std::is_void_v<typename impl1::Type>, typename impl2::Type, typename impl1::Type>;
 };
 
 template<typename Array>

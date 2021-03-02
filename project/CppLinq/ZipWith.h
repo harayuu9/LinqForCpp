@@ -11,6 +11,7 @@ class ZipWithBuilder
     template<class Array>
     class Impl
     {
+        using RawItr = decltype(Begin(std::declval<Array>()));
     public:
         Impl( Impl&& other ) = default;
         Impl& operator=( Impl&& other ) = default;
@@ -19,7 +20,6 @@ class ZipWithBuilder
         {
         }
 
-        template<class RawItr>
         struct Iterator : IteratorBase<RawItr>
         {
             using iterator_category = std::forward_iterator_tag;
@@ -67,7 +67,7 @@ class ZipWithBuilder
         {
             auto rawBeginItr = Begin( mArray );
             auto zipBeginItr = Begin( mZipArray );
-            return Iterator<decltype(rawBeginItr)>( rawBeginItr, zipBeginItr );
+            return Iterator( rawBeginItr, zipBeginItr );
         }
 
         [[nodiscard]] auto end() const noexcept
@@ -81,7 +81,7 @@ class ZipWithBuilder
             const auto min = std::min( rawCnt, zipCnt );
             std::advance( rawBeginItr, min );
             std::advance( zipBeginItr, min );
-            return Iterator<decltype(rawBeginItr)>( rawBeginItr, zipBeginItr );
+            return Iterator( rawBeginItr, zipBeginItr );
         }
 
     private:

@@ -47,7 +47,7 @@ namespace linq {
  * auto newArray = array << Select([](auto value) { return static_cast<float>(value); });
  */
 template<class Array, class Builder, typename = is_builder_t<Array, Builder>>
-constexpr auto operator<<( Array&& arr, Builder&& builder )
+auto operator<<( Array&& arr, Builder&& builder )
 {
     return builder.build( std::forward<Array>( arr ) );
 }
