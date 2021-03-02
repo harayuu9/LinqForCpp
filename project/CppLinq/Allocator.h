@@ -38,4 +38,5 @@ namespace linq {
 //};
 
 template<class T>
-using Allocator = std::allocator<T>;}
+using Allocator = std::allocator<T>;
+}

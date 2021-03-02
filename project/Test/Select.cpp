@@ -1,45 +1,45 @@
 ﻿#include "Test.h"
 
-TEST(Select, Select)
+TEST( Select, Select )
 {
     std::vector<std::string> baseResult;
-    baseResult.reserve(std::size(gBigStruct));
-    for (auto&& bigStruct : gBigStruct)
+    baseResult.reserve( std::size( gBigStruct ) );
+    for ( auto&& bigStruct : gBigStruct )
     {
-        baseResult.push_back(bigStruct.name);
+        baseResult.push_back( bigStruct.name );
     }
 
-    const auto result = gBigStruct << SELECT(val, val.name) << linq::ToVector();
-    ASSERT_EQ(baseResult, result);
+    const auto result = gBigStruct << SELECT( val, val.name ) << linq::ToVector();
+    ASSERT_EQ( baseResult, result );
 }
 
-TEST(Select, SelectMany)
+TEST( Select, SelectMany )
 {
     std::vector<int> baseResult;
-    for (auto&& data : gBigStruct)
+    for ( auto&& data : gBigStruct )
     {
         std::vector<int> temp;
-        temp.reserve(data.id);
-        for (auto i = 0; i < data.id; i++)
+        temp.reserve( data.id );
+        for ( auto i = 0; i < data.id; i++ )
         {
-            temp.push_back(data.id * i);
+            temp.push_back( data.id * i );
         }
-        baseResult.insert(baseResult.end(), temp.begin(), temp.end());
+        baseResult.insert( baseResult.end(), temp.begin(), temp.end() );
     }
 
     auto result = gBigStruct
-        << linq::SelectMany([&](const auto& x)
-    {
-        std::vector<int> result;
-        result.reserve(x.id);
-        for (auto i = 0; i < x.id; i++)
+        << linq::SelectMany( [&]( const auto& x )
         {
-            result.push_back(x.id * i);
-        }
-        return result;
-    })
+            std::vector<int> result;
+            result.reserve( x.id );
+            for ( auto i = 0; i < x.id; i++ )
+            {
+                result.push_back( x.id * i );
+            }
+            return result;
+        } )
         << linq::ToVector();
-    ASSERT_EQ(result, baseResult);
+    ASSERT_EQ( result, baseResult );
 }
 
 #if ENABLE_PERF
