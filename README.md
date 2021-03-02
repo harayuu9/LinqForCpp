@@ -1,6 +1,6 @@
 # Linq For Cpp
 [![CMake Test](https://github.com/harayuu9/LinqForCpp/actions/workflows/build_test.yml/badge.svg)](https://github.com/harayuu9/LinqForCpp/actions/workflows/build_test.yml)
- I am implementing LINQ in C++ that can be used in C#.
+* I am implementing LINQ in C++ that can be used in C#.
 * LinqForCpp always compares its speed with that of Native, so it has superior performance.
 * Most of the processes ran at about the same speed as Native, with some lazy execution giving better performance than Native.
 * [Performance Test Result](https://harayuu9.github.io/LinqForCpp/)
@@ -10,8 +10,8 @@
 * C++17,C++20
 
 ## Getting Started
-not yet
-~~can use a single header file or a split header file.
+* not yet
+~~* can use a single header file or a split header file.
 check the [releases](https://github.com/harayuu9/LinqForCpp/releases) page, download `LinqForCpp.zip`.~~
 
 ```cpp
