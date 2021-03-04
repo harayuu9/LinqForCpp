@@ -11,7 +11,7 @@
 
 ## Getting Started
 * can use a single header file or a split header file. check the [releases](https://github.com/harayuu9/LinqForCpp/releases) page, download `LinqForCpp.zip`.
-*Please add `Linq` or `SingleHeader/Linq.hpp` to my project!
+* Please add `Linq` or `SingleHeader/Linq.hpp` to my project!
 
 ```cpp
 #include "Linq.h"
