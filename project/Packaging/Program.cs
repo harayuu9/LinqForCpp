@@ -124,7 +124,7 @@ internal static class Program
         var projectPath = args.Length == 0 ? "../../../../" : args[0] + "/";
         projectPath = Path.GetFullPath(projectPath);
         MakeRelease(projectPath);
-        ZipFile.CreateFromDirectory(projectPath + "Release", projectPath + "Release.zip");
+        ZipFile.CreateFromDirectory(projectPath + "Release", "Release.zip");
     }
 }
 }
