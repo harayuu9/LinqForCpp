@@ -120,28 +120,28 @@ function drawImpl()
     leftTab.innerHTML = tabHtml;
 }
 
-function drawBarChart(filePath, tag, end = false) {
-    var req = new XMLHttpRequest();
-    req.open("GET", filePath, true);
-    req.onload = function () {
-        const json = JSON.parse(req.responseText);
-        loadJson(json, tag);
-
-        if(end)
-        {
-            drawImpl();
-        }
-    };
-    req.send(null);
+function drawBarChart(filePath, tag) {
+    const p = new Promise((resolve, reject) =>{
+        var req = new XMLHttpRequest();
+        req.open("GET", filePath, true);
+        req.onload = function () {
+            const json = JSON.parse(req.responseText);
+            loadJson(json, tag);
+            resolve();
+        };
+        req.send(null);
+    });
+    return p;
 }
 
 function main() {
-    drawBarChart("Json/windows-latest.CPP17.json", "Win17");
-    drawBarChart("Json/windows-latest.CPP20.json", "Win20");
-    drawBarChart("Json/ubuntu-latest.CPP17.json", "Ubuntu17");
-    drawBarChart("Json/ubuntu-latest.CPP20.json","Ubuntu20");
-    drawBarChart("Json/macos-latest.CPP17.json", "Mac17");
-    drawBarChart("Json/macos-latest.CPP20.json", "Mac20", true);
+    drawBarChart("Json/windows-latest.CPP17.json", "Win17")
+        .then(() => drawBarChart("Json/windows-latest.CPP20.json", "Win20"))
+        .then(() => drawBarChart("Json/ubuntu-latest.CPP17.json", "Ubuntu17"))
+        .then(() => drawBarChart("Json/ubuntu-latest.CPP20.json", "Ubuntu20"))
+        .then(() => drawBarChart("Json/macos-latest.CPP17.json", "Mac17"))
+        .then(() => drawBarChart("Json/macos-latest.CPP20.json", "Mac20"))
+        .then(() => drawImpl());
 }
 
 function OnButtonClick(num)
