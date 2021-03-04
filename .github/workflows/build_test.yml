@@ -4,8 +4,6 @@ on:
     paths:
       - ".github/workflows/build_test.yml"
       - "project/**"
-env:
-  IS_DISABLE_EXCEPTION: ${{ matrix.disable_exception }})
 
 jobs:
   build:
@@ -13,6 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       CPP_VERSION: ${{ matrix.version }})
+      IS_DISABLE_EXCEPTION: ${{ matrix.disable_exception }})
 
     strategy:
       fail-fast: false
