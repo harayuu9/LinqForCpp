@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: create hpp
-      run: dotnet run --project $GITHUB_WORKSPACE/project/MakeSingleHeader $GITHUB_WORKSPACE/project
+      run: dotnet run --project $GITHUB_WORKSPACE/project/Packaging $GITHUB_WORKSPACE/project
 
     - name: create release
       id: create_release
