@@ -4,8 +4,6 @@ on:
     paths:
       - ".github/workflows/build_test.yml"
       - "project/**"
-    tags-ignore:
-      - 'v*'
 
 jobs:
   build:
