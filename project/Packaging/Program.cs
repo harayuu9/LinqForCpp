@@ -32,7 +32,7 @@ internal static class Program
     private static void MakeRelease(string projectDir)
     {
         var linqDir = projectDir + "Linq/";
-        var rawFile = File.ReadAllLines(linqDir + "Linq.h");
+        var rawFile = File.ReadAllLines(linqDir + "Linq.h").Skip(5);
 
         var          builder       = new StringBuilder();
         var          defineBuilder = new StringBuilder();
@@ -47,7 +47,7 @@ internal static class Program
             if (line.StartsWith(include))
             {
                 var headerName    = line.Substring(include.Length, line.Length - include.Length - 1);
-                var headerRawFile = File.ReadAllLines(linqDir                  + headerName);
+                var headerRawFile = File.ReadAllLines(linqDir                  + headerName).Skip(5);
                 foreach (var headerLine in headerRawFile)
                 {
                     if (headerLine.StartsWith("#pragma") || headerLine.StartsWith(include)) continue;
@@ -107,7 +107,15 @@ internal static class Program
             }
         }
 
-        var fileHeader = "#pragma once" + Environment.NewLine;
+        var fileHeader =
+            "// ----------------------------------------------------------------------------------------------" +
+            Environment.NewLine +
+            "// Copyright (c) 2021 Yuto Harada" + Environment.NewLine +
+            "// ----------------------------------------------------------------------------------------------" +
+            Environment.NewLine +
+            "// This software is released under the MIT License, see LICENSE." + Environment.NewLine +
+            "//" + Environment.NewLine +
+            "#pragma once" + Environment.NewLine;
 
         CopyDirectory(linqDir, projectDir + "Release/Linq");
         if (!Directory.Exists(projectDir         + "Release/SingleHeader"))
@@ -118,12 +126,13 @@ internal static class Program
         File.WriteAllText(projectDir + "Release/SingleHeader/Linq.hpp",
                           fileHeader + rawInclude + defineBuilder + nameSpace + builder + "}", Encoding.UTF8);
     }
-    
+
     private static void Main(string[] args)
     {
         var projectPath = args.Length == 0 ? "../../../../" : args[0] + "/";
         projectPath = Path.GetFullPath(projectPath);
         MakeRelease(projectPath);
+        File.Copy(projectPath                   + "../LICENCE.txt", projectPath + "Release/LICENCE.txt", true);
         ZipFile.CreateFromDirectory(projectPath + "Release", "Release.zip");
     }
 }

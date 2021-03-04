@@ -1,6 +1,10 @@
-﻿#pragma once
+﻿// ----------------------------------------------------------------------------------------------
+// Copyright (c) 2021 Yuto Harada
+// ----------------------------------------------------------------------------------------------
+// This software is released under the MIT License, see LICENSE.
+//
+#pragma once
 #include <vector>
-
 #include "TypeTraits.h"
 
 namespace linq {

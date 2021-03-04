@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿// ----------------------------------------------------------------------------------------------
+// Copyright (c) 2021 Yuto Harada
+// ----------------------------------------------------------------------------------------------
+// This software is released under the MIT License, see LICENSE.
+//
+#pragma once
 #include <type_traits>
 #include <iterator>
 #include "RuntimeMacro.h"

@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿// ----------------------------------------------------------------------------------------------
+// Copyright (c) 2021 Yuto Harada
+// ----------------------------------------------------------------------------------------------
+// This software is released under the MIT License, see LICENSE.
+//
+#pragma once
 #include "TypeTraits.h"
 #define AGGREGATE(initValue, variant1, variant2, convert) ::linq::Aggregate(initValue, [&](const auto& (variant1), const auto& (variant2)){ return convert; })
 

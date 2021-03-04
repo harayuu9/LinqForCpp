@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿// ----------------------------------------------------------------------------------------------
+// Copyright (c) 2021 Yuto Harada
+// ----------------------------------------------------------------------------------------------
+// This software is released under the MIT License, see LICENSE.
+//
+#pragma once
 #include "OrderBy.h"
 
 #define THEN_BY(variant, cond, isAscending) ::linq::ThenBy([&](const auto& (variant)){ return cond;}, isAscending)

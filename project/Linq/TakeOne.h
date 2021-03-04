@@ -1,4 +1,9 @@
-﻿#pragma once
+﻿// ----------------------------------------------------------------------------------------------
+// Copyright (c) 2021 Yuto Harada
+// ----------------------------------------------------------------------------------------------
+// This software is released under the MIT License, see LICENSE.
+//
+#pragma once
 #include "TypeTraits.h"
 
 #ifndef _LIBCPP_NO_EXCEPTIONS
