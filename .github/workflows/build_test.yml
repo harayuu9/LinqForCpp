@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.os }}.CPP${{ matrix.version }}.${{ matrix.build_type }}
+    name: ${{ matrix.os }}.CPP${{ matrix.version }}.${{ matrix.build_type }}.NoException=${{ matrix.disable_exception }})
     runs-on: ${{ matrix.os }}
     env:
       CPP_VERSION: ${{ matrix.version }})

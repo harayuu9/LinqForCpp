@@ -87,14 +87,14 @@ endif()
 
 file(GLOB
   SOURCE_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/CppLinq/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/CppLinq/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Linq/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Linq/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Test/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Test/*.cpp
     )
 add_executable(main ${SOURCE_FILES})
 
-target_include_directories(main PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/sourceCode/cpplinq/CppLinq ${CMAKE_CURRENT_SOURCE_DIR}/CppLinq)
+target_include_directories(main PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/sourceCode/cpplinq/CppLinq ${CMAKE_CURRENT_SOURCE_DIR}/Linq)
 
 if($ENV{IS_PERFORMANCE_TEST})
     add_definitions(-DENABLE_PERF)

@@ -10,12 +10,13 @@
 * C++17,C++20
 
 ## Getting Started
-* not yet
-~~* can use a single header file or a split header file.
-check the [releases](https://github.com/harayuu9/LinqForCpp/releases) page, download `LinqForCpp.zip`.~~
+* can use a single header file or a split header file. check the [releases](https://github.com/harayuu9/LinqForCpp/releases) page, download `LinqForCpp.zip`.
+*Please add `Linq` or `SingleHeader/Linq.hpp` to my project!
 
 ```cpp
 #include "Linq.h"
+// or
+#include "Linq.hpp"
 
 int main()
 {
