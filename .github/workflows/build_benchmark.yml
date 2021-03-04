@@ -4,6 +4,8 @@ on:
     paths:
       - ".github/workflows/build_benchmark.yml"
       - "project/**"
+    tags-ignore:
+      - 'v*'
 env:
   IS_PERFORMANCE_TEST: TRUE
 
