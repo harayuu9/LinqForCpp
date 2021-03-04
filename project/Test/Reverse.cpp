@@ -20,7 +20,7 @@ static void NativeReverse( benchmark::State& state )
 	}
 }
 
-static void CppForLinqReverse( benchmark::State& state )
+static void LinqForCppReverse( benchmark::State& state )
 {
 	while ( state.KeepRunning() )
 	{
@@ -40,6 +40,6 @@ static void CppLinqReverse( benchmark::State& state )
 	}
 }
 BENCHMARK( NativeReverse );
-BENCHMARK( CppForLinqReverse );
+BENCHMARK( LinqForCppReverse );
 BENCHMARK( CppLinqReverse );
 #endif

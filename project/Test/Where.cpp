@@ -29,7 +29,7 @@ static void NativeWhere( benchmark::State& state )
 	}
 }
 
-static void CppForLinqWhere( benchmark::State& state )
+static void LinqForCppWhere( benchmark::State& state )
 {
 	while ( state.KeepRunning() )
 	{
@@ -53,6 +53,6 @@ static void CppLinqWhere( benchmark::State& state )
 }
 
 BENCHMARK( NativeWhere );
-BENCHMARK( CppForLinqWhere );
+BENCHMARK( LinqForCppWhere );
 BENCHMARK( CppLinqWhere );
 #endif

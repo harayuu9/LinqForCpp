@@ -19,7 +19,7 @@ static void NativeSequenceEqual( benchmark::State& state )
     }
 }
 
-static void CppForLinqSequenceEqual( benchmark::State& state )
+static void LinqForCppSequenceEqual( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -42,6 +42,6 @@ static void CppLinqSequenceEqual( benchmark::State& state )
 }
 
 BENCHMARK( NativeSequenceEqual );
-BENCHMARK( CppForLinqSequenceEqual );
+BENCHMARK( LinqForCppSequenceEqual );
 BENCHMARK( CppLinqSequenceEqual );
 #endif

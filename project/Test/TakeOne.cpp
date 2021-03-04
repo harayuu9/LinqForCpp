@@ -60,7 +60,7 @@ static void NativeFirst( benchmark::State& state )
     }
 }
 
-static void CppForLinqFirst( benchmark::State& state )
+static void LinqForCppFirst( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -98,7 +98,7 @@ static void NativeLast( benchmark::State& state )
     }
 }
 
-static void CppForLinqLast( benchmark::State& state )
+static void LinqForCppLast( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -121,9 +121,9 @@ static void CppLinqLast( benchmark::State& state )
 }
 
 BENCHMARK( NativeFirst );
-BENCHMARK( CppForLinqFirst );
+BENCHMARK( LinqForCppFirst );
 BENCHMARK( CppLinqFirst );
 BENCHMARK( NativeLast );
-BENCHMARK( CppForLinqLast );
+BENCHMARK( LinqForCppLast );
 BENCHMARK( CppLinqLast );
 #endif

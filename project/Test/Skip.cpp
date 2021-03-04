@@ -49,7 +49,7 @@ static void NativeSkip( benchmark::State& state )
     }
 }
 
-static void CppForLinqSkip( benchmark::State& state )
+static void LinqForCppSkip( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -90,7 +90,7 @@ static void NativeSkipWhile( benchmark::State& state )
     }
 }
 
-static void CppForLinqSkipWhile( benchmark::State& state )
+static void LinqForCppSkipWhile( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -113,9 +113,9 @@ static void CppLinqSkipWhile( benchmark::State& state )
 }
 
 BENCHMARK( NativeSkip );
-BENCHMARK( CppForLinqSkip );
+BENCHMARK( LinqForCppSkip );
 BENCHMARK( CppLinqSkip );
 BENCHMARK( NativeSkipWhile );
-BENCHMARK( CppForLinqSkipWhile );
+BENCHMARK( LinqForCppSkipWhile );
 BENCHMARK( CppLinqSkipWhile );
 #endif

@@ -46,7 +46,7 @@ static void NativeTake( benchmark::State& state )
     }
 }
 
-static void CppForLinqTake( benchmark::State& state )
+static void LinqForCppTake( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -84,7 +84,7 @@ static void NativeTakeWhile( benchmark::State& state )
     }
 }
 
-static void CppForLinqTakeWhile( benchmark::State& state )
+static void LinqForCppTakeWhile( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -107,9 +107,9 @@ static void CppLinqTakeWhile( benchmark::State& state )
 }
 
 BENCHMARK( NativeTake );
-BENCHMARK( CppForLinqTake );
+BENCHMARK( LinqForCppTake );
 BENCHMARK( CppLinqTake );
 BENCHMARK( NativeTakeWhile );
-BENCHMARK( CppForLinqTakeWhile );
+BENCHMARK( LinqForCppTakeWhile );
 BENCHMARK( CppLinqTakeWhile );
 #endif

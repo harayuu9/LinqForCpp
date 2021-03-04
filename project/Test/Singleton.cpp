@@ -22,7 +22,7 @@ static void NativeSingleton( benchmark::State& state )
     }
 }
 
-static void CppForLinqSingleton( benchmark::State& state )
+static void LinqForCppSingleton( benchmark::State& state )
 {
     while ( state.KeepRunning() )
     {
@@ -43,6 +43,6 @@ static void CppLinqSingleton( benchmark::State& state )
 }
 
 BENCHMARK( NativeSingleton );
-BENCHMARK( CppForLinqSingleton );
+BENCHMARK( LinqForCppSingleton );
 BENCHMARK( CppLinqSingleton );
 #endif
