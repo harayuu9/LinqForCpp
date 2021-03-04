@@ -1,13 +1,17 @@
 ﻿#pragma once
-#include <exception>
 #include "TypeTraits.h"
 
+#ifndef _LIBCPP_NO_EXCEPTIONS
+#include <exception>
 #define FIRST(variant, cond) ::linq::First([&](const auto& (variant)){ return cond; })
-#define FIRST_OR_DEFAULT(variant, cond) ::linq::FirstOrDefault([&](const auto& (variant)){ return cond; })
 #define LAST(variant, cond) ::linq::Last([&](const auto& (variant)){ return cond; })
+#endif
+
 #define LAST_OR_DEFAULT(variant, cond) ::linq::LastOrDefault([&](const auto& (variant)){ return cond; })
+#define FIRST_OR_DEFAULT(variant, cond) ::linq::FirstOrDefault([&](const auto& (variant)){ return cond; })
 namespace linq {
 
+#ifndef _LIBCPP_NO_EXCEPTIONS
 struct empty_exception : std::exception
 {
     [[nodiscard]] char const* what() const noexcept override
@@ -39,31 +43,6 @@ struct FirstBuilder
 private:
     Func mFunc;
 };
-
-template<typename Func>
-struct FirstOrDefaultBuilder
-{
-    explicit FirstOrDefaultBuilder( Func&& func ) noexcept : mFunc( std::move( func ) )
-    {
-    }
-
-    template<class Array>
-    array_type_t<Array> build( Array&& arr ) noexcept
-    {
-        static_assert(have_iterator_v<Array> || have_const_iterator_v<Array>, "T have not iterator");
-
-        auto endItr = std::end(arr);
-        auto resultItr = std::find_if(std::begin(arr), endItr, mFunc);
-
-        if (resultItr != endItr)
-            return *resultItr;
-        return {};
-    }
-
-private:
-    Func mFunc;
-};
-
 template<typename Func>
 struct LastBuilder
 {
@@ -102,6 +81,42 @@ struct LastBuilder
                 return *pFind;
         }
         throw empty_exception();
+    }
+
+private:
+    Func mFunc;
+};
+
+template<typename Func>
+FirstBuilder<Func> First(Func&& func) noexcept
+{
+    return FirstBuilder<Func>(std::forward<Func>(func));
+}
+template<typename Func>
+LastBuilder<Func> Last(Func&& func) noexcept
+{
+    return LastBuilder<Func>(std::forward<Func>(func));
+}
+#endif
+
+template<typename Func>
+struct FirstOrDefaultBuilder
+{
+    explicit FirstOrDefaultBuilder(Func&& func) noexcept : mFunc(std::move(func))
+    {
+    }
+
+    template<class Array>
+    array_type_t<Array> build(Array&& arr) noexcept
+    {
+        static_assert(have_iterator_v<Array> || have_const_iterator_v<Array>, "T have not iterator");
+
+        auto endItr = std::end(arr);
+        auto resultItr = std::find_if(std::begin(arr), endItr, mFunc);
+
+        if (resultItr != endItr)
+            return *resultItr;
+        return {};
     }
 
 private:
@@ -153,21 +168,9 @@ private:
 };
 
 template<typename Func>
-FirstBuilder<Func> First( Func&& func ) noexcept
+FirstOrDefaultBuilder<Func> FirstOrDefault(Func&& func) noexcept
 {
-    return FirstBuilder<Func>( std::forward<Func>( func ) );
-}
-
-template<typename Func>
-FirstOrDefaultBuilder<Func> FirstOrDefault( Func&& func ) noexcept
-{
-    return FirstOrDefaultBuilder<Func>( std::forward<Func>( func ) );
-}
-
-template<typename Func>
-LastBuilder<Func> Last( Func&& func ) noexcept
-{
-    return LastBuilder<Func>( std::forward<Func>( func ) );
+    return FirstOrDefaultBuilder<Func>(std::forward<Func>(func));
 }
 
 template<typename Func>

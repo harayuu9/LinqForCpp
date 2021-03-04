@@ -15,7 +15,7 @@ struct ToVectorBuilder
 
         if constexpr (is_select_many_v<Array>)
         {
-            std::vector<array_type_t<Array>> result;
+            std::vector<array_type_t<Array>, Allocator<array_type_t<Array>>> result;
             auto begin = Begin(arr.mArray);
             const auto end = End(arr.mArray);
 

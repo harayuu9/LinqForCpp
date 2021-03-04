@@ -33,13 +33,51 @@ constexpr bool have_iterator_v = have_iterator<T>::Type::value;
 template<typename T>
 constexpr bool have_const_iterator_v = have_const_iterator<T>::Type::value;
 
+template<class Array>
+auto Begin(const Array& arr)
+{
+    if constexpr (std::is_pointer_v<Array>)
+    {
+        if constexpr (have_iterator_v<Array>)
+            return std::begin(*const_cast<Array&>(arr));
+        else
+            return std::begin(*arr);
+    }
+    else
+    {
+        if constexpr (have_iterator_v<Array>)
+            return std::begin(const_cast<Array&>(arr));
+        else
+            return std::begin(arr);
+    }
+}
+
+template<class Array>
+auto End(const Array& arr)
+{
+    if constexpr (std::is_pointer_v<Array>)
+    {
+        if constexpr (have_iterator_v<Array>)
+            return std::end(*const_cast<Array&>(arr));
+        else
+            return std::end(*arr);
+    }
+    else
+    {
+        if constexpr (have_iterator_v<Array>)
+            return std::end(const_cast<Array&>(arr));
+        else
+            return std::end(arr);
+    }
+}
+
 // Get array type
 template<typename Array>
 class array_type
 {
     class impl1
     {
-        template<typename U> static auto test(int) -> decltype(*std::begin(std::declval<std::add_const_t<U>>()));
+        template<typename U> static auto test(int) -> decltype(*Begin(std::declval<std::add_const_t<U>>()));
         template<typename U> static void test(...);
     public:
         using Type = std::remove_const_t<std::remove_reference_t<decltype(test<Array>(1))>>;
@@ -47,14 +85,11 @@ class array_type
 
     class impl2
     {
-        template<typename U> static auto test(int) -> decltype(*std::begin(std::declval<U>()));
+        template<typename U> static auto test(int) -> decltype(*Begin(std::declval<U>()));
         template<typename U> static void test(...);
     public:
         using Type = std::remove_const_t<std::remove_reference_t<decltype(test<Array>(1))>>;
     };
-
-    template<typename U> static auto test( int ) -> decltype(*std::begin( std::declval<std::add_const_t<U>>() ));
-    template<typename U> static void test( ... );
 public:
     using Type = std::conditional_t<std::is_void_v<typename impl1::Type>, typename impl2::Type, typename impl1::Type>;
 };
@@ -148,42 +183,4 @@ public:
 
 template<class Array, class Builder>
 using is_builder_t = std::enable_if_t<is_builder<Array, Builder>::type::value>;
-
-template<class Array>
-auto Begin( const Array& arr )
-{
-    if constexpr ( std::is_pointer_v<Array> )
-    {
-        if constexpr ( have_iterator_v<Array> )
-            return std::begin( *const_cast<Array&>( arr ) );
-        else
-            return std::begin( *arr );
-    }
-    else
-    {
-        if constexpr ( have_iterator_v<Array> )
-            return std::begin( const_cast<Array&>( arr ) );
-        else
-            return std::begin( arr );
-    }
-}
-
-template<class Array>
-auto End( const Array& arr )
-{
-    if constexpr ( std::is_pointer_v<Array> )
-    {
-        if constexpr ( have_iterator_v<Array> )
-            return std::end( *const_cast<Array&>( arr ) );
-        else
-            return std::end( *arr );
-    }
-    else
-    {
-        if constexpr ( have_iterator_v<Array> )
-            return std::end( const_cast<Array&>( arr ) );
-        else
-            return std::end( arr );
-    }
-}
 }

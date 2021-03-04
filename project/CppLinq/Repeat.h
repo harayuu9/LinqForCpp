@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "TypeTraits.h"
+#include <string_view>
 
 namespace linq {
 template<typename T>

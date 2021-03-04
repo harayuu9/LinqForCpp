@@ -12,8 +12,6 @@ jobs:
     name: ${{ matrix.os }}.CPP${{ matrix.version }}
     runs-on: ${{ matrix.os }}
     env:
-      CMAKE_C_COMPILER: ${{ matrix.cc }})
-      CMAKE_CXX_COMPILER: ${{ matrix.cxx }})
       CPP_VERSION: ${{ matrix.version }})
 
     strategy:

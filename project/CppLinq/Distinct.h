@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <set>
 #include <unordered_set>
 #include "TypeTraits.h"
 #include "Allocator.h"

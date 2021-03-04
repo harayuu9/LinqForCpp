@@ -4,14 +4,14 @@ on:
     paths:
       - ".github/workflows/build_test.yml"
       - "project/**"
+env:
+  IS_DISABLE_EXCEPTION: ${{ matrix.disable_exception }})
 
 jobs:
   build:
     name: ${{ matrix.os }}.CPP${{ matrix.version }}.${{ matrix.build_type }}
     runs-on: ${{ matrix.os }}
     env:
-      CMAKE_C_COMPILER: ${{ matrix.cc }})
-      CMAKE_CXX_COMPILER: ${{ matrix.cxx }})
       CPP_VERSION: ${{ matrix.version }})
 
     strategy:
@@ -20,6 +20,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         build_type: ['Release', 'Debug']
         version: ["17", "20"]
+        disable_exception: [TRUE, FALSE]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -28,12 +29,12 @@ jobs:
     - name: create build environment
       run: cmake -E make_directory ${{ runner.workspace }}/_build
 
-    - name: Cache
-      id: cache-primes
-      uses: actions/cache@v2
-      with:
-        path: _build
-        key: test--${{ matrix.os }}--CPP${{ matrix.version }}--${{ matrix.build_type }}
+    # - name: Cache
+    #   id: cache-primes
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: _build
+    #     key: test--${{ matrix.os }}--CPP${{ matrix.version }}--${{ matrix.build_type }}--${{ matrix.disable_exception }}
 
     - name: configure cmake
       shell: bash

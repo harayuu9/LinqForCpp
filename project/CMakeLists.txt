@@ -77,6 +77,14 @@ else()
   set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 endif()
 
+if($ENV{IS_DISABLE_EXCEPTION})
+  string(REGEX REPLACE "/EH[a-z]+" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+  
+  string(REGEX REPLACE "-fexceptions" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
+endif()
+
 file(GLOB
   SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/CppLinq/*.h
